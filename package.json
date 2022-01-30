@@ -1,6 +1,6 @@
 {
   "name": "zamts",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A bootstrapper for TypeScript projects",
   "homepage": "https://github.com/Zamiell/zamts",
   "bugs": {
