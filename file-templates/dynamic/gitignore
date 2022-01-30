@@ -1,5 +1,10 @@
-# GitHub .gitignore for Node
-# https://raw.githubusercontent.com/github/gitignore/master/Node.gitignore
+# MacOS artifacts
+.DS_Store
+
+# --------------------------------------------------------------
+# GitHub Node.gitignore template
+# https://github.com/github/gitignore/blob/master/Node.gitignore
+# --------------------------------------------------------------
 
 # Logs
 logs

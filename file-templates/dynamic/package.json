@@ -1,0 +1,19 @@
+{
+  "name": "PROJECT_NAME",
+  "version": "0.0.0",
+  "description": "",
+  "homepage": "https://github.com/AUTHOR_NAME/PROJECT_NAME",
+  "bugs": {
+    "url": "https://github.com/AUTHOR_NAME/PROJECT_NAME/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AUTHOR_NAME/PROJECT_NAME.git"
+  },
+  "license": "GPL-3.0",
+  "author": "AUTHOR_NAME",
+  "dependencies": {
+    "isaacscript-lint": "^0.0.1",
+    "isaacscript-tsconfig": "^0.0.1"
+  }
+}
