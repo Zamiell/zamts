@@ -4,8 +4,6 @@ import path from "path";
 import {
   GITIGNORE,
   GITIGNORE_TEMPLATE_PATH,
-  MAIN_TS,
-  MAIN_TS_TEMPLATE_PATH,
   PACKAGE_JSON,
   PACKAGE_JSON_TEMPLATE_PATH,
   PROJECT_NAME,
@@ -96,19 +94,6 @@ function copyDynamicFiles(
     const readmeMD = template.replaceAll("PROJECT_NAME", projectName);
     const destinationPath = path.join(projectPath, fileName);
     file.write(destinationPath, readmeMD);
-  }
-
-  // "src/main.ts"
-  {
-    // Convert snake_case and kebab-case to camelCase
-    // (kebab-case in particular will make the example TypeScript file fail to compile)
-    const srcPath = path.join(projectPath, "src");
-    const fileName = MAIN_TS;
-    const templatePath = MAIN_TS_TEMPLATE_PATH;
-    const template = file.read(templatePath);
-    const mainTS = template.replaceAll("PROJECT_NAME", projectName);
-    const destinationPath = path.join(srcPath, fileName);
-    file.write(destinationPath, mainTS);
   }
 }
 

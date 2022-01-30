@@ -8,10 +8,6 @@
   "editor.rulers": [100],
   "editor.tabSize": 2,
 
-  "files.associations": {
-    "*.anm2": "xml", // anm2 files are just XML files
-  },
-
   // Linux line endings are used in this project
   "files.eol": "\n",
 
@@ -20,14 +16,12 @@
 
   // Configure glob patterns for excluding files and folders in full text searches and quick open
   "search.exclude": {
-    "**/mod/main.lua": true,
-    "**/*.png": true,
-    "**/*.wav": true,
+    "dist/**": true,
   },
 
-  // -----------------
-  // Language settings
-  // -----------------
+  // -----------------------
+  // JavaScript / TypeScript
+  // -----------------------
 
   // By default, VSCode will not automatically fill-in function arguments
   "javascript.suggest.completeFunctionCalls": true,
@@ -35,19 +29,19 @@
 
   // Automatically run the formatter when a JavaScript or TypeScript file is saved
   "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true,
     "editor.codeActionsOnSave": [
       "source.fixAll.eslint",
     ],
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
     "editor.tabSize": 2,
   },
   "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.formatOnSave": true,
     "editor.codeActionsOnSave": [
       "source.fixAll.eslint",
     ],
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
     "editor.tabSize": 2,
   },
 }

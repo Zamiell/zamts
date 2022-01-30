@@ -19,6 +19,7 @@ const TEMPLATES_DIR = path.join(REPO_ROOT, "file-templates");
 
 // zamts/file-templates/static
 export const TEMPLATES_STATIC_DIR = path.join(TEMPLATES_DIR, "static");
+export const MAIN_TS = "main.ts";
 
 // isaacscript/file-templates/dynamic
 const TEMPLATES_DYNAMIC_DIR = path.join(TEMPLATES_DIR, "dynamic");
@@ -27,8 +28,6 @@ export const GITIGNORE_TEMPLATE_PATH = path.join(
   TEMPLATES_DYNAMIC_DIR,
   GITIGNORE,
 );
-export const MAIN_TS = "main.ts";
-export const MAIN_TS_TEMPLATE_PATH = path.join(TEMPLATES_DYNAMIC_DIR, MAIN_TS);
 export const PACKAGE_JSON = "package.json";
 export const PACKAGE_JSON_TEMPLATE_PATH = path.join(
   TEMPLATES_DYNAMIC_DIR,
