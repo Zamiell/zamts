@@ -41,11 +41,12 @@ async function main(): Promise<void> {
   await checkForWindowsTerminalBugs();
 
   await handleCommands(argv as Record<string, unknown>);
+  process.exit(0);
 }
 
 function printBanner() {
   console.log(chalk.green(figlet.textSync(PROJECT_NAME)));
-  const bannerLength = 55;
+  const bannerLength = 29; // From measuring the banner created by Figlet
   const version = `v${pkg.version}`;
   const leftPaddingAmount = Math.floor((bannerLength + version.length) / 2);
   console.log(version.padStart(leftPaddingAmount));

@@ -13,7 +13,7 @@ import {
 } from "../../constants";
 import * as file from "../../file";
 import { getGitHubUsername } from "../../github";
-import { getInputString, getInputYesNo } from "../../prompt";
+import { getInputString } from "../../prompt";
 import { execShell } from "../../util";
 
 export async function createProject(
@@ -135,16 +135,9 @@ async function initGitRepository(projectPath: string, projectName: string) {
 }
 
 async function getGitRemoteURL(projectName: string) {
-  const guessedRemoteURL = guessRemoteURL(projectName);
-  if (guessedRemoteURL !== undefined) {
-    const shouldUseGuessedURL = await getInputYesNo(
-      `Do you want to use a Git remote URL of: ${chalk.green(
-        guessedRemoteURL,
-      )}`,
-    );
-    if (shouldUseGuessedURL) {
-      return guessedRemoteURL;
-    }
+  const gitRemoteURL = getRemoteGitURLFromGitHub(projectName);
+  if (gitRemoteURL !== null) {
+    return gitRemoteURL;
   }
 
   return getInputString(`Paste in the remote Git URL for your project.
@@ -156,10 +149,10 @@ If you don't want to initialize a Git repository for this project, press enter t
 `);
 }
 
-function guessRemoteURL(projectName: string) {
+function getRemoteGitURLFromGitHub(projectName: string): string | null {
   const gitHubUsername = getGitHubUsername();
   if (gitHubUsername === undefined) {
-    return undefined;
+    return null;
   }
 
   return `git@github.com:${gitHubUsername}/${projectName}.git`;

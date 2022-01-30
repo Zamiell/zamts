@@ -1,7 +1,5 @@
-import chalk from "chalk";
 import commandExists from "command-exists";
 import path from "path";
-import { CWD, PROJECT_NAME } from "../../constants";
 import { checkIfProjectPathExists } from "./checkIfProjectPathExists";
 import { createProject } from "./createProject";
 import { getAuthorName } from "./getAuthorName";
@@ -25,7 +23,6 @@ export async function init(argv: Record<string, unknown>): Promise<void> {
     skipNPMInstall,
   );
   await openVSCode(projectPath, argv);
-  printFinishMessage(projectPath, projectName);
 }
 
 async function openVSCode(projectPath: string, argv: Record<string, unknown>) {
@@ -41,7 +38,7 @@ async function openVSCode(projectPath: string, argv: Record<string, unknown>) {
   await promptVSCode(projectPath, argv, VSCodeCommand);
 }
 
-function getVSCodeCommand() {
+function getVSCodeCommand(): string | null {
   for (const VSCodeCommand of ["code", "codium", "code-oss", "code-insiders"]) {
     if (commandExists.sync(VSCodeCommand)) {
       return VSCodeCommand;
@@ -49,13 +46,4 @@ function getVSCodeCommand() {
   }
 
   return null;
-}
-
-function printFinishMessage(projectPath: string, projectName: string) {
-  let commandsToType = "";
-  if (projectPath !== CWD) {
-    commandsToType += `"${chalk.green(`cd ${projectName}`)}" and `;
-  }
-  commandsToType += `"${chalk.green("npx isaacscript")}"`;
-  console.log(`Now, start ${PROJECT_NAME} by typing ${commandsToType}.`);
 }
