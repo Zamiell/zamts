@@ -8,9 +8,9 @@
 
 ## Why?
 
-Setting up new TypeScript projects is a pain. You have to do `npm init --yes`, install deps, make a `tsconfig.json` file, set up [Prettier](https://prettier.io/) and [ESLint](https://eslint.org/), set up [VSCode](https://code.visualstudio.com/) settings, set up [git](https://git-scm.com/), set up [cspell](https://github.com/streetsidesoftware/cspell) settings, and more. It's very annoying.
+Setting up new TypeScript projects is a pain. You have to set up a `package.json` file, install deps, make a `tsconfig.json` file, set up [Prettier](https://prettier.io/), set up [ESLint](https://eslint.org/), set up [git](https://git-scm.com/), set up [VSCode](https://code.visualstudio.com/) settings, and so on.
 
-Instead, simply use this bootstrapper. Tell it the name of your project, and it will create a new directory with everything already set up for you.
+But there's a better way. Tell `zamts` the name of your project, and it will create a new directory with everything already set up for you.
 
 <br>
 
