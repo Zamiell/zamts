@@ -1,10 +1,10 @@
-import { getGitHubUsername } from "../../github";
+import { getGitHubUsername } from "../../git";
 import { getInputString } from "../../prompt";
 import { error } from "../../util";
 
-export async function getAuthorName(): Promise<string> {
-  const gitHubUsername = getGitHubUsername();
-  if (gitHubUsername !== null) {
+export async function getAuthorName(verbose: boolean): Promise<string> {
+  const gitHubUsername = getGitHubUsername(verbose);
+  if (gitHubUsername !== undefined) {
     return gitHubUsername;
   }
 

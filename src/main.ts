@@ -31,6 +31,7 @@ async function main(): Promise<void> {
 
   // Get command line arguments
   const argv = parseArgs();
+  const verbose = argv.verbose === true;
 
   printBanner();
 
@@ -38,7 +39,7 @@ async function main(): Promise<void> {
   updateNotifier({ pkg }).notify();
 
   // Pre-flight checks
-  await checkForWindowsTerminalBugs();
+  await checkForWindowsTerminalBugs(verbose);
 
   await handleCommands(argv);
   process.exit(0);

@@ -8,6 +8,12 @@ export function parseArgs(): Record<string, unknown> {
 
     .command("init [name]", "Initialize a new TypeScript project.", (builder) =>
       builder
+        .option("yes", {
+          alias: "y",
+          type: "boolean",
+          description:
+            'Answer yes to every dialog option, similar to how "npm init --yes" works.',
+        })
         .option("use-current-dir", {
           alias: "u",
           type: "boolean",
@@ -23,6 +29,11 @@ export function parseArgs(): Record<string, unknown> {
           type: "boolean",
           description:
             'Don\'t automatically run "npm install" after initializing the project',
+        })
+        .option("verbose", {
+          alias: "v",
+          type: "boolean",
+          description: "Enable verbose output",
         }),
     )
 

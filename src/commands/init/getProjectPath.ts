@@ -2,7 +2,7 @@ import chalk from "chalk";
 import path from "path";
 import { CURRENT_DIRECTORY_NAME, CWD } from "../../constants";
 import { getInputString, getInputYesNo } from "../../prompt";
-import { error, hasWhiteSpace } from "../../util";
+import { error, hasWhiteSpace, isKebabCase } from "../../util";
 
 // From: https://gist.github.com/doctaphred/d01d05291546186941e1b7ddc02034d3
 const ILLEGAL_CHARACTERS_FOR_WINDOWS_FILENAMES = [
@@ -19,20 +19,28 @@ const ILLEGAL_CHARACTERS_FOR_WINDOWS_FILENAMES = [
 
 export async function getProjectPath(
   argv: Record<string, unknown>,
+  useCurrentDir: boolean,
+  yes: boolean,
 ): Promise<[string, boolean]> {
   let projectName = getProjectNameFromCommandLineArgument(argv);
   let projectPath: string;
   let createNewDir: boolean;
-  if (argv.useCurrentDir !== undefined) {
+  if (useCurrentDir) {
     // The "--use-current-dir" command-line flag was specified,
     // so there is no need to prompt the user
     projectName = CURRENT_DIRECTORY_NAME;
     projectPath = CWD;
     createNewDir = false;
-  } else if (projectName !== null) {
+  } else if (projectName !== undefined) {
     // The project name was specified on the command-line
     projectPath = path.join(CWD, projectName);
     createNewDir = true;
+  } else if (yes) {
+    // The "--yes" command-line flag was specified and the project name was not specified on the
+    // command-line, so default to using the current directory
+    projectName = CURRENT_DIRECTORY_NAME;
+    projectPath = CWD;
+    createNewDir = false;
   } else {
     // The project name was not specified on the command-line, so prompt the user for it
     [projectName, projectPath, createNewDir] = await getNewProjectName();
@@ -46,8 +54,10 @@ export async function getProjectPath(
 
 function getProjectNameFromCommandLineArgument(
   argv: Record<string, unknown>,
-): string | null {
-  return typeof argv.name === "string" && argv.name !== "" ? argv.name : null;
+): string | undefined {
+  return typeof argv.name === "string" && argv.name !== ""
+    ? argv.name
+    : undefined;
 }
 
 async function getNewProjectName(): Promise<[string, string, boolean]> {
@@ -86,6 +96,12 @@ function validateProjectName(projectName: string) {
   if (hasWhiteSpace(projectName)) {
     error(
       'Error: The project name has whitespace in it, which is not allowed. Use kebab-case for your project name. (e.g. "green-candle")',
+    );
+  }
+
+  if (!isKebabCase(projectName)) {
+    error(
+      "Error: The project name is not in kebab-case. (Kebab-case is the style of using all lowercase letters, with words separated by hyphens.) Project names must use kebab-case to match GitHub repository standards.",
     );
   }
 }
