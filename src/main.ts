@@ -40,7 +40,7 @@ async function main(): Promise<void> {
   // Pre-flight checks
   await checkForWindowsTerminalBugs();
 
-  await handleCommands(argv as Record<string, unknown>);
+  await handleCommands(argv);
   process.exit(0);
 }
 
