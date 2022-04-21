@@ -12,7 +12,8 @@
   },
   "license": "GPL-3.0",
   "author": "AUTHOR_NAME",
-  "dependencies": {
+  "devDependencies": {
+    "typescript": "^0.0.1",
     "isaacscript-lint": "^0.0.1",
     "isaacscript-tsconfig": "^0.0.1"
   }
