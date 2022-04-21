@@ -14,7 +14,7 @@
   "author": "AUTHOR_NAME",
   "scripts": {
     "build": "tsc",
-    "start": "dist/main"
+    "start": "node dist/main"
   },
   "devDependencies": {
     "typescript": "^0.0.1",
