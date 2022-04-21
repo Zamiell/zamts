@@ -12,6 +12,10 @@
   },
   "license": "GPL-3.0",
   "author": "AUTHOR_NAME",
+  "scripts": {
+    "build": "tsc",
+    "start": "dist/main"
+  },
   "devDependencies": {
     "typescript": "^0.0.1",
     "isaacscript-lint": "^0.0.1",
