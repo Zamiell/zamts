@@ -10,14 +10,12 @@ const REQUIRED_MAJOR_VERSION = 16;
 export function validateNodeVersion(): void {
   const { version } = process;
 
-  const [major, minor, patch] = parseSemVer(version);
-  if (major >= REQUIRED_MAJOR_VERSION) {
+  const [majorVersion] = parseSemVer(version);
+  if (majorVersion >= REQUIRED_MAJOR_VERSION) {
     return;
   }
 
-  console.error(
-    `Your Node.js version is: ${chalk.red(`${major}.${minor}.${patch}`)}`,
-  );
+  console.error(`Your Node.js version is: ${chalk.red(version)}`);
   console.error(
     `${PROJECT_NAME} requires a Node.js version of ${chalk.red(
       "16.0.0",
