@@ -1,6 +1,6 @@
 import chalk from "chalk";
 import { PROJECT_NAME } from "./constants";
-import { error } from "./util";
+import { parseSemVer } from "./util";
 
 const REQUIRED_MAJOR_VERSION = 16;
 
@@ -10,43 +10,13 @@ const REQUIRED_MAJOR_VERSION = 16;
 export function validateNodeVersion(): void {
   const { version } = process;
 
-  const match = /^v(\d+)\.(\d+)\.(\d)+$/g.exec(version);
-  if (match === null) {
-    error(`Failed to parse your NodeJS version of: ${version}`);
-  }
-
-  const majorVersionString = match[1];
-  const majorVersion = parseInt(majorVersionString, 10);
-  if (Number.isNaN(majorVersion)) {
-    error(
-      `Failed to parse the major version number from: ${majorVersionString}`,
-    );
-  }
-
-  const minorVersionString = match[2];
-  const minorVersion = parseInt(minorVersionString, 10);
-  if (Number.isNaN(minorVersion)) {
-    error(
-      `Failed to parse the minor version number from: ${minorVersionString}`,
-    );
-  }
-
-  const patchVersionString = match[3];
-  const patchVersion = parseInt(patchVersionString, 10);
-  if (Number.isNaN(patchVersion)) {
-    error(
-      `Failed to parse the patch version number from: ${patchVersionString}`,
-    );
-  }
-
-  if (majorVersion >= REQUIRED_MAJOR_VERSION) {
+  const [major, minor, patch] = parseSemVer(version);
+  if (major >= REQUIRED_MAJOR_VERSION) {
     return;
   }
 
   console.error(
-    `Your Node.js version is: ${chalk.red(
-      `${majorVersionString}.${minorVersionString}.${patchVersionString}`,
-    )}`,
+    `Your Node.js version is: ${chalk.red(`${major}.${minor}.${patch}`)}`,
   );
   console.error(
     `${PROJECT_NAME} requires a Node.js version of ${chalk.red(

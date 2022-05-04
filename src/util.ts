@@ -30,7 +30,8 @@ export function execShell(
     );
   }
   for (let i = 0; i < args.length; i++) {
-    if (args[i].includes('"')) {
+    const arg = args[i];
+    if (arg !== undefined && arg.includes('"')) {
       throw new Error(
         "execShell cannot execute commands with double quotes in the arguments.",
       );
@@ -100,7 +101,7 @@ export function isKebabCase(s: string): boolean {
  * parseIntSafe is a more reliable version of parseInt. By default, "parseInt('1a')" will return
  * "1", which is unexpected. This returns either an integer or NaN.
  */
-function parseIntSafe(input: string): number {
+function parseIntSafe(input: unknown): number {
   if (typeof input !== "string") {
     return NaN;
   }
@@ -142,12 +143,12 @@ export function parseSemVer(
     error(`Failed to parse the major version number from: ${versionString}`);
   }
 
-  const minorVersion = parseInt(minorVersionString, 10);
+  const minorVersion = parseIntSafe(minorVersionString);
   if (Number.isNaN(minorVersion)) {
     error(`Failed to parse the minor version number from: ${versionString}`);
   }
 
-  const patchVersion = parseInt(patchVersionString, 10);
+  const patchVersion = parseIntSafe(patchVersionString);
   if (Number.isNaN(patchVersion)) {
     error(`Failed to parse the patch version number from: ${versionString}`);
   }
