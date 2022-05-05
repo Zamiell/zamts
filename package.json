@@ -1,6 +1,6 @@
 {
   "name": "zamts",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "A bootstrapper for TypeScript projects",
   "homepage": "https://github.com/Zamiell/zamts",
   "bugs": {
@@ -38,7 +38,7 @@
     "@types/update-notifier": "^5.1.0",
     "@types/yargs": "^17.0.10",
     "isaacscript-lint": "^1.0.104",
-    "isaacscript-tsconfig": "^1.1.11",
+    "isaacscript-tsconfig": "^1.1.12",
     "typescript": "^4.6.4"
   }
 }
