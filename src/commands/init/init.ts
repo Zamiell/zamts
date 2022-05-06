@@ -9,12 +9,12 @@ import { installVSCodeExtensions } from "./installVSCodeExtensions";
 import { promptVSCode } from "./promptVSCode";
 
 export async function init(argv: Record<string, unknown>): Promise<void> {
-  const skipNPMInstall = argv.skipNpmInstall === true;
-  const useCurrentDir = argv.useCurrentDir === true;
-  const verbose = argv.verbose === true;
-  const vscode = argv.vscode === true;
-  const yes = argv.yes === true;
-  const forceName = argv.forceName === true;
+  const skipNPMInstall = argv["skipNpmInstall"] === true;
+  const useCurrentDir = argv["useCurrentDir"] === true;
+  const verbose = argv["verbose"] === true;
+  const vscode = argv["vscode"] === true;
+  const yes = argv["yes"] === true;
+  const forceName = argv["forceName"] === true;
 
   // Prompt the end-user for some information (and validate it as we go)
   const [projectPath, createNewDir] = await getProjectPath(

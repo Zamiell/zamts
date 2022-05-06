@@ -31,7 +31,7 @@ async function main(): Promise<void> {
 
   // Get command line arguments
   const argv = parseArgs();
-  const verbose = argv.verbose === true;
+  const verbose = argv["verbose"] === true;
 
   printBanner();
 
@@ -55,7 +55,7 @@ function printBanner() {
 }
 
 async function handleCommands(argv: Record<string, unknown>) {
-  const positionalArgs = argv._ as string[];
+  const positionalArgs = argv["_"] as string[];
   let command: Command;
   if (positionalArgs.length > 0) {
     command = positionalArgs[0] as Command;
