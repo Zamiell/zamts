@@ -21,9 +21,8 @@ export function execShell(
   allowFailure = false,
   cwd = CWD,
 ): [exitStatus: number, stdout: string] {
-  // On Windows, "spawnSync()" will not account for spaces in arguments
-  // Thus, wrap everything in a double quote
-  // This will cause arguments that naturally have double quotes to fail
+  // On Windows, "spawnSync()" will not account for spaces in arguments. Thus, wrap everything in a
+  // double quote. This will cause arguments that naturally have double quotes to fail.
   if (command.includes('"')) {
     throw new Error(
       "execShell cannot execute commands with double quotes in the command.",
