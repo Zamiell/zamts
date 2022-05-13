@@ -27,7 +27,7 @@ export async function checkForWindowsTerminalBugs(
 }
 
 async function checkForWindowsBugColor(verbose: boolean) {
-  if (process.env["FORCE_COLOR"] === "true") {
+  if (process.env["FORCE_COLOR"] === "1") {
     return;
   }
 

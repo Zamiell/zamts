@@ -4,5 +4,13 @@
   "import": ["./.cspell-base.json"],
   "files": ["**"],
   "ignorePaths": [".git/**", "dist/**", "node_modules/**"],
-  "words": ["dbaeumer", "isaacscript", "sarisia", "technote", "Zamiell"]
+  "words": [
+    "dbaeumer",
+    "isaacscript",
+    "prettierignore",
+    "prettierrc",
+    "sarisia",
+    "technote",
+    "Zamiell"
+  ]
 }
