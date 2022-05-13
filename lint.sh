@@ -27,9 +27,6 @@ npx cspell --no-progress --no-summary "src/**/*.ts"
 npx ts-prune --error
 
 # Step 5 - Check for gitignore updates from GitHub.
-tail -n +6 .gitignore > gitignore-template-local
-curl https://raw.githubusercontent.com/github/gitignore/master/Node.gitignore --output gitignore-template-github --silent
-diff gitignore-template-local gitignore-template-github
-rm -f gitignore-template-local gitignore-template-github
+"$DIR/check-gitignore.sh"
 
 echo "Successfully linted in $SECONDS seconds."
