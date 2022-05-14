@@ -9,6 +9,7 @@ FILES_TO_CHECK=(
   ".gitattributes"
   ".prettierignore"
   ".prettierrc.js"
+  "check-orphaned-words.sh"
   "tsconfig.json"
   "tsconfig.eslint.json"
 )
