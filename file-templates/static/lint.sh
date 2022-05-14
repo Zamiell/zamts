@@ -26,4 +26,10 @@ npx cspell --no-progress --no-summary
 # The "--error" flag makes it return an error code of 1 if unused exports are found.
 npx ts-prune --error
 
+# Step 5 - Check for base file updates.
+bash "$DIR/check-file-updates.sh"
+
+# Step 6 - Check for orphaned words.
+bash "$DIR/check-orphaned-words.sh"
+
 echo "Successfully linted in $SECONDS seconds."
