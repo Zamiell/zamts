@@ -1,4 +1,4 @@
-// This is the configuration file for Prettier, the auto-formatter.
+// This is the configuration file for Prettier, the auto-formatter:
 // https://prettier.io/docs/en/configuration.html
 module.exports = {
   // https://prettier.io/docs/en/options.html#trailing-commas
