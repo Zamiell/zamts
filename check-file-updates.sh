@@ -7,7 +7,6 @@ FILES_TO_CHECK=(
   ".cspell-base.json"
   ".cspell-check-unused.json"
   ".gitattributes"
-  ".gitignore"
   ".prettierignore"
   ".prettierrc.js"
   "tsconfig.eslint.json"

@@ -18,7 +18,7 @@ But there's a better way. Tell `zamts` the name of your project, and it will cre
 
 Use it like so:
 
-```
+```sh
 npx zamts init my-project
 ```
 
