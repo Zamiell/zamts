@@ -95,7 +95,7 @@ export function isKebabCase(s: string): boolean {
 }
 
 /**
- * parseIntSafe is a more reliable version of parseInt. By default, "parseInt('1a')" will return
+ * `parseIntSafe` is a more reliable version of `parseInt`. By default, `parseInt('1a')` will return
  * "1", which is unexpected. This returns either an integer or NaN.
  */
 function parseIntSafe(input: unknown): number {
@@ -103,22 +103,22 @@ function parseIntSafe(input: unknown): number {
     return NaN;
   }
 
-  // Remove all leading and trailing whitespace
+  // Remove all leading and trailing whitespace.
   let trimmedInput = input.trim();
 
   const isNegativeNumber = trimmedInput.startsWith("-");
   if (isNegativeNumber) {
-    // Remove the leading minus sign before we match the regular expression
+    // Remove the leading minus sign before we match the regular expression.
     trimmedInput = trimmedInput.substring(1);
   }
 
+  // "\d" matches any digit (same as "[0-9]").
   if (/^\d+$/.exec(trimmedInput) === null) {
-    // "\d" matches any digit (same as "[0-9]")
     return NaN;
   }
 
   if (isNegativeNumber) {
-    // Add the leading minus sign back
+    // Add the leading minus sign back.
     trimmedInput = `-${trimmedInput}`;
   }
 

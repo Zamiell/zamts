@@ -6,7 +6,7 @@ import { PROJECT_NAME } from "./constants";
 import * as file from "./file";
 import { getInputString, getInputYesNo } from "./prompt";
 import { GitHubCLIHostsYAML } from "./types/GitHubCLIHostsYAML";
-import { error, execShell, parseSemVer } from "./util";
+import { error, execShell, parseSemVer } from "./utils";
 
 const REQUIRED_GIT_MAJOR_VERSION = 2;
 const REQUIRED_GIT_MINOR_VERSION = 30;
@@ -16,7 +16,7 @@ export async function promptGitHubRepoOrGitRemoteURL(
   yes: boolean,
   verbose: boolean,
 ): Promise<string | undefined> {
-  // We do not need to prompt the user if they do not have Git installed
+  // We do not need to prompt the user if they do not have Git installed.
   if (!commandExists.sync("git")) {
     console.log(
       'Git does not seem to be installed. (The "git" command is not in the path.) Skipping Git-related things.',
@@ -60,7 +60,7 @@ export async function promptGitHubRepoOrGitRemoteURL(
       }
 
       // Assume that since they do not want to connect this project to the existing GitHub
-      // repository, they do not want to initialize a remote Git URL at all
+      // repository, they do not want to initialize a remote Git URL at all.
       return undefined;
     }
 
@@ -82,7 +82,7 @@ export async function promptGitHubRepoOrGitRemoteURL(
     }
 
     // Assume that since they do not want to create a new GitHub repository, they do not want to
-    // initialize a remote Git URL at all
+    // initialize a remote Git URL at all.
     return undefined;
   }
 
@@ -131,7 +131,7 @@ function validateNewGitVersion(verbose: boolean) {
 }
 
 export function getGitHubUsername(verbose: boolean): string | undefined {
-  // If the GitHub CLI is installed, we can derive the user's GitHub username
+  // If the GitHub CLI is installed, we can derive the user's GitHub username.
   if (!commandExists.sync("gh")) {
     return undefined;
   }

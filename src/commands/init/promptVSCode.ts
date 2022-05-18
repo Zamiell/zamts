@@ -1,7 +1,7 @@
 import path from "path";
 import { MAIN_TS } from "../../constants";
 import { getInputYesNo } from "../../prompt";
-import { execShell } from "../../util";
+import { execShell } from "../../utils";
 
 export async function promptVSCode(
   projectPath: string,
@@ -10,7 +10,7 @@ export async function promptVSCode(
   verbose: boolean,
 ): Promise<void> {
   if (vscode) {
-    // They supplied the "--vscode" command-line flag, so there is no need to prompt the user
+    // They supplied the "--vscode" command-line flag, so there is no need to prompt the user.
     openVSCode(projectPath, VSCodeCommand, verbose);
     return;
   }

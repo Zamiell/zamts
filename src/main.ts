@@ -13,7 +13,7 @@ import { CWD, PROJECT_NAME } from "./constants";
 import { parseArgs } from "./parseArgs";
 import { promptInit } from "./prompt";
 import { Command, DEFAULT_COMMAND } from "./types/Command";
-import { ensureAllCases, error } from "./util";
+import { ensureAllCases, error } from "./utils";
 import { validateNodeVersion } from "./validateNodeVersion";
 
 main().catch((err) => {
@@ -25,20 +25,20 @@ async function main(): Promise<void> {
   promptInit();
   validateNodeVersion();
 
-  // Load environment variables from the ".env" file
+  // Load environment variables from the ".env" file.
   const envFile = path.join(CWD, ".env");
   dotenv.config({ path: envFile });
 
-  // Get command line arguments
+  // Get command line arguments.
   const argv = parseArgs();
   const verbose = argv["verbose"] === true;
 
   printBanner();
 
-  // Check for a new version
+  // Check for a new version.
   updateNotifier({ pkg }).notify();
 
-  // Pre-flight checks
+  // Pre-flight checks.
   await checkForWindowsTerminalBugs(verbose);
 
   await handleCommands(argv);

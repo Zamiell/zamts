@@ -1,6 +1,6 @@
 import chalk from "chalk";
 import fs from "fs-extra";
-import { error } from "./util";
+import { error } from "./utils";
 
 export function copy(srcPath: string, dstPath: string, verbose: boolean): void {
   if (verbose) {
@@ -8,7 +8,7 @@ export function copy(srcPath: string, dstPath: string, verbose: boolean): void {
   }
 
   try {
-    // "copySync()" is a "fs-extra" method for copying directories recursively
+    // `copySync` is a `fs-extra` method for copying directories recursively.
     fs.copySync(srcPath, dstPath, {
       recursive: true,
     });

@@ -11,7 +11,7 @@ import {
 } from "../../constants";
 import * as file from "../../file";
 import { initGitRepository } from "../../git";
-import { execShell } from "../../util";
+import { execShell } from "../../utils";
 
 export function createProject(
   projectName: string,
@@ -32,7 +32,7 @@ export function createProject(
   installNodeModules(projectPath, skipNPMInstall, verbose);
   formatFiles(projectPath, verbose);
 
-  // Only make the initial commit once all of the files have been copied and formatted
+  // Only make the initial commit once all of the files have been copied and formatted.
   initGitRepository(projectPath, gitRemoteURL, verbose);
 
   console.log(`Successfully created project: ${chalk.green(projectName)}`);
@@ -50,20 +50,20 @@ function copyStaticFiles(projectPath: string, verbose: boolean) {
   });
 }
 
-// Copy files that need to have text replaced inside of them
+// Copy files that need to have text replaced inside of them.
 function copyDynamicFiles(
   projectName: string,
   projectPath: string,
   authorName: string,
   verbose: boolean,
 ) {
-  // ".gitignore"
+  // `.gitignore`
   {
     const fileName = GITIGNORE;
     const templatePath = GITIGNORE_TEMPLATE_PATH;
     const template = file.read(templatePath, verbose);
 
-    // Prepend a header with the project name
+    // Prepend a header with the project name.
     let separatorLine = "# ";
     for (let i = 0; i < projectName.length; i++) {
       separatorLine += "-";
@@ -76,9 +76,9 @@ function copyDynamicFiles(
     file.write(destinationPath, gitignore, verbose);
   }
 
-  // "package.json"
+  // `package.json`
   {
-    // Modify and copy the file
+    // Modify and copy the file.
     const fileName = PACKAGE_JSON;
     const templatePath = PACKAGE_JSON_TEMPLATE_PATH;
     const template = file.read(templatePath, verbose);
@@ -89,7 +89,7 @@ function copyDynamicFiles(
     file.write(destinationPath, packageJSON, verbose);
   }
 
-  // "README.md"
+  // `README.md`
   {
     const fileName = README_MD;
     const templatePath = README_MD_TEMPLATES_PATH;

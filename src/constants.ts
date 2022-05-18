@@ -3,7 +3,10 @@ import path from "path";
 
 const cwd = process.cwd();
 
-// https://stackoverflow.com/questions/9080085/node-js-find-home-directory-in-platform-agnostic-way
+/**
+ * From:
+ * https://stackoverflow.com/questions/9080085/node-js-find-home-directory-in-platform-agnostic-way
+ */
 const homeDir = os.homedir();
 
 export const CURRENT_DIRECTORY_NAME = path.basename(cwd);
@@ -11,17 +14,17 @@ export const CWD = cwd;
 export const HOME_DIR = homeDir;
 export const PROJECT_NAME = "zamts";
 
-// zamts
+// `zamts`
 const REPO_ROOT = path.join(__dirname, "..", "..");
 
-// zamts/file-templates
+// `zamts/file-templates`
 const TEMPLATES_DIR = path.join(REPO_ROOT, "file-templates");
 
-// zamts/file-templates/static
+// `zamts/file-templates/static`
 export const TEMPLATES_STATIC_DIR = path.join(TEMPLATES_DIR, "static");
 export const MAIN_TS = "main.ts";
 
-// isaacscript/file-templates/dynamic
+// `zamts/file-templates/dynamic`
 const TEMPLATES_DYNAMIC_DIR = path.join(TEMPLATES_DIR, "dynamic");
 export const GITIGNORE = "gitignore"; // Not named ".gitignore" to prevent NPM from deleting it
 export const GITIGNORE_TEMPLATE_PATH = path.join(

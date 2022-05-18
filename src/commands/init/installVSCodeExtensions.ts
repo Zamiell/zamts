@@ -2,7 +2,7 @@ import chalk from "chalk";
 import * as JSONC from "jsonc-parser";
 import path from "path";
 import * as file from "../../file";
-import { error, execShell } from "../../util";
+import { error, execShell } from "../../utils";
 
 export function installVSCodeExtensions(
   projectPath: string,
