@@ -46,11 +46,19 @@ async function main(): Promise<void> {
 }
 
 function printBanner() {
-  console.log(chalk.green(figlet.textSync(PROJECT_NAME)));
-  const bannerLength = 29; // From measuring the banner created by Figlet
+  const bannerText = figlet.textSync(PROJECT_NAME);
+  console.log(chalk.green(bannerText));
+
   const version = `v${pkg.version}`;
+  const bannerTextLines = bannerText.split("\n");
+  const firstBannerTextLine = bannerTextLines[0];
+  if (firstBannerTextLine === undefined) {
+    throw new Error("Failed to get the first line of the banner text.");
+  }
+  const bannerLength = firstBannerTextLine.length;
   const leftPaddingAmount = Math.floor((bannerLength + version.length) / 2);
   console.log(version.padStart(leftPaddingAmount));
+
   console.log();
 }
 
