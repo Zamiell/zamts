@@ -1,10 +1,28 @@
 import yargs from "yargs";
 
-export function parseArgs(): Record<string, unknown> {
+export interface Args {
+  _: string[];
+
+  // init
+  name?: string;
+  yes?: boolean;
+  useCurrentDir?: boolean;
+  vscode?: boolean;
+  skipInstall?: boolean;
+  forceName?: boolean;
+
+  // shared
+  verbose?: boolean;
+}
+
+export function parseArgs(): Args {
   const yargsObject = yargs(process.argv.slice(2))
     .strict()
     .usage("usage: zamts <command> [options]")
     .scriptName("zamts")
+
+    .alias("h", "help") // By default, only "--help" is enabled
+    .alias("v", "version") // By default, only "--version" is enabled
 
     .command("init [name]", "Initialize a new TypeScript project.", (builder) =>
       builder
@@ -24,11 +42,11 @@ export function parseArgs(): Record<string, unknown> {
           type: "boolean",
           description: "Open the project in VSCode after initialization",
         })
-        .option("skip-npm-install", {
+        .option("skip-install", {
           alias: "i",
           type: "boolean",
           description:
-            'Don\'t automatically run "npm install" after initializing the project',
+            "Don't automatically install the dependencies after initializing the project",
         })
         .option("force-name", {
           alias: "f",
@@ -42,8 +60,7 @@ export function parseArgs(): Record<string, unknown> {
         }),
     )
 
-    .alias("h", "help") // By default, only "--help" is enabled
-    .alias("v", "version"); // By default, only "--version" is enabled
+    .parseSync();
 
-  return yargsObject.argv as Record<string, unknown>;
+  return yargsObject as Args;
 }

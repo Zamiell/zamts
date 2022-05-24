@@ -1460,11 +1460,6 @@ eslint-plugin-jsdoc@^39.3.0:
     semver "^7.3.7"
     spdx-expression-parse "^3.0.1"
 
-eslint-plugin-no-implicit-map-set-loops@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-no-implicit-map-set-loops/-/eslint-plugin-no-implicit-map-set-loops-1.0.3.tgz#1415c3a123f9aedd93dc1b373f3ca0822b8bcafc"
-  integrity sha512-j0iPXg44VL8QFK1Qp2wkD3j8xfUV28e/MwmlzTyhcRJ+ZltNbSZwqWF1o2bws6PClBaUN6aFoj/k0eKEv/gS0w==
-
 eslint-plugin-only-warn@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/eslint-plugin-only-warn/-/eslint-plugin-only-warn-1.0.3.tgz#a75f3a9ded7f03e9808e75ec27f22b644084506e"
@@ -2220,10 +2215,10 @@ is-yarn-global@^0.3.0:
   resolved "https://registry.yarnpkg.com/is-yarn-global/-/is-yarn-global-0.3.0.tgz#d502d3382590ea3004893746754c89139973e232"
   integrity sha512-VjSeb/lHmkoyd8ryPVIKvOCn4D1koMqY+vqyjjUfc3xyKtP4dYOxM44sZrnqQSzSds3xyOrUTLTC9LVCVgLngw==
 
-isaacscript-lint@^1.0.159:
-  version "1.0.159"
-  resolved "https://registry.yarnpkg.com/isaacscript-lint/-/isaacscript-lint-1.0.159.tgz#8a218b6865fc3d007a57a157ac0b7a4c5a171ef0"
-  integrity sha512-y3Tz5q38ky7XEDyMQTp5tDY5Zbv74uL6ht2NABNL+HtcIe9wERb0jW7rRrYgEmvKBUs/9lg0yaVDg6DvbduDDg==
+isaacscript-lint@^1.0.160:
+  version "1.0.160"
+  resolved "https://registry.yarnpkg.com/isaacscript-lint/-/isaacscript-lint-1.0.160.tgz#74a14dafdf2f47d1b518779e725b18d7a8665343"
+  integrity sha512-42inDfPVlOE3qkR/VhYGibUo04CefweBrERXPw170KNy3eegwBGtX2VD6L8GrAs5fresC4xHsXG8+pN7fBEmkg==
   dependencies:
     "@prettier/plugin-xml" "^2.2.0"
     "@typescript-eslint/eslint-plugin" "^5.25.0"
@@ -2238,17 +2233,16 @@ isaacscript-lint@^1.0.159:
     eslint-plugin-import "^2.26.0"
     eslint-plugin-isaacscript "^1.0.45"
     eslint-plugin-jsdoc "^39.3.0"
-    eslint-plugin-no-implicit-map-set-loops "^1.0.3"
     eslint-plugin-only-warn "^1.0.3"
     eslint-plugin-sort-exports "^0.6.0"
     prettier "^2.6.2"
     prettier-plugin-organize-imports "^2.3.4"
     ts-prune "^0.10.3"
 
-isaacscript-tsconfig@^1.1.16:
-  version "1.1.16"
-  resolved "https://registry.yarnpkg.com/isaacscript-tsconfig/-/isaacscript-tsconfig-1.1.16.tgz#2e1c6a42a4c6025d9e5b1975e92a026b9f763e4b"
-  integrity sha512-bhw4byyD0KEb3QLe23b7rF+jWGX9MAYbCUcU0mvoHJeHnUVW3rw10QnhDXa7OHgZuozBvHTC9pzE1Yniyo+QWg==
+isaacscript-tsconfig@^1.1.17:
+  version "1.1.17"
+  resolved "https://registry.yarnpkg.com/isaacscript-tsconfig/-/isaacscript-tsconfig-1.1.17.tgz#784bc2b4318a3fdb096b596162281af6bbe6f3d9"
+  integrity sha512-JgEPRQMStwhI30qo7RTS/34+B+1QiaB+NAat7KTdkdxdZNUFt9+uAGw2iNILNl3MV+w4g32UmXvYxoSw3R/kaw==
 
 isexe@^2.0.0:
   version "2.0.0"

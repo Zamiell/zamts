@@ -1,6 +1,7 @@
 import commandExists from "command-exists";
 import path from "path";
 import { promptGitHubRepoOrGitRemoteURL } from "../../git";
+import { Args } from "../../parseArgs";
 import { checkIfProjectPathExists } from "./checkIfProjectPathExists";
 import { createProject } from "./createProject";
 import { getAuthorName } from "./getAuthorName";
@@ -8,17 +9,17 @@ import { getProjectPath } from "./getProjectPath";
 import { installVSCodeExtensions } from "./installVSCodeExtensions";
 import { promptVSCode } from "./promptVSCode";
 
-export async function init(argv: Record<string, unknown>): Promise<void> {
-  const skipNPMInstall = argv["skipNpmInstall"] === true;
-  const useCurrentDir = argv["useCurrentDir"] === true;
-  const verbose = argv["verbose"] === true;
-  const vscode = argv["vscode"] === true;
-  const yes = argv["yes"] === true;
-  const forceName = argv["forceName"] === true;
+export async function init(args: Args): Promise<void> {
+  const skipNPMInstall = args.skipInstall === true;
+  const useCurrentDir = args.useCurrentDir === true;
+  const verbose = args.verbose === true;
+  const vscode = args.vscode === true;
+  const yes = args.yes === true;
+  const forceName = args.forceName === true;
 
   // Prompt the end-user for some information (and validate it as we go).
   const [projectPath, createNewDir] = await getProjectPath(
-    argv,
+    args,
     useCurrentDir,
     yes,
     forceName,

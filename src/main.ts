@@ -10,7 +10,7 @@ import pkg from "../package.json";
 import { checkForWindowsTerminalBugs } from "./checkForWindowsTerminalBugs";
 import { init } from "./commands/init/init";
 import { CWD, PROJECT_NAME } from "./constants";
-import { parseArgs } from "./parseArgs";
+import { Args, parseArgs } from "./parseArgs";
 import { promptInit } from "./prompt";
 import { Command, DEFAULT_COMMAND } from "./types/Command";
 import { ensureAllCases, error } from "./utils";
@@ -30,8 +30,8 @@ async function main(): Promise<void> {
   dotenv.config({ path: envFile });
 
   // Get command line arguments.
-  const argv = parseArgs();
-  const verbose = argv["verbose"] === true;
+  const args = parseArgs();
+  const verbose = args.verbose === true;
 
   printBanner();
 
@@ -41,7 +41,7 @@ async function main(): Promise<void> {
   // Pre-flight checks.
   await checkForWindowsTerminalBugs(verbose);
 
-  await handleCommands(argv);
+  await handleCommands(args);
   process.exit(0);
 }
 
@@ -62,18 +62,17 @@ function printBanner() {
   console.log();
 }
 
-async function handleCommands(argv: Record<string, unknown>) {
-  const positionalArgs = argv["_"] as string[];
-  let command: Command;
-  if (positionalArgs.length > 0) {
-    command = positionalArgs[0] as Command;
-  } else {
-    command = DEFAULT_COMMAND;
-  }
+async function handleCommands(args: Args) {
+  const positionalArgs = args._;
+  const firstPositionArg = positionalArgs[0];
+  const command: Command =
+    firstPositionArg === undefined || firstPositionArg === ""
+      ? DEFAULT_COMMAND
+      : (firstPositionArg as Command);
 
   switch (command) {
     case "init": {
-      await init(argv);
+      await init(args);
       break;
     }
 
