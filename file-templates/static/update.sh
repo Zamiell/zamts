@@ -15,7 +15,7 @@ NEW_HASH=$(md5sum "$PACKAGE_JSON")
 if [[ $OLD_HASH != $NEW_HASH ]]; then
   if test -f "$DIR/yarn.lock"; then
     yarn
-  else
+  elif test -f "$DIR/package-lock.json"; then
     npm install
   fi
 fi

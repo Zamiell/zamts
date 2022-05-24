@@ -8,6 +8,7 @@ export interface Args {
   yes?: boolean;
   useCurrentDir?: boolean;
   vscode?: boolean;
+  npm?: boolean;
   skipInstall?: boolean;
   forceName?: boolean;
 
@@ -41,6 +42,11 @@ export function parseArgs(): Args {
           alias: "c",
           type: "boolean",
           description: "Open the project in VSCode after initialization",
+        })
+        .option("npm", {
+          alias: "n",
+          type: "boolean",
+          description: "Use NPM as the package manager instead of Yarn",
         })
         .option("skip-install", {
           alias: "i",

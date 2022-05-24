@@ -11,7 +11,8 @@ import {
 } from "../../constants";
 import * as file from "../../file";
 import { initGitRepository } from "../../git";
-import { execShell } from "../../utils";
+import { PackageManager } from "../../types/PackageManager";
+import { ensureAllCases, execShell } from "../../utils";
 
 export function createProject(
   projectName: string,
@@ -19,7 +20,8 @@ export function createProject(
   authorName: string,
   createNewDir: boolean,
   gitRemoteURL: string | undefined,
-  skipNPMInstall: boolean,
+  skipInstall: boolean,
+  packageManager: PackageManager,
   verbose: boolean,
 ): void {
   if (createNewDir) {
@@ -29,7 +31,7 @@ export function createProject(
   copyStaticFiles(projectPath, verbose);
   copyDynamicFiles(projectName, projectPath, authorName, verbose);
   updateNodeModules(projectPath, verbose);
-  installNodeModules(projectPath, skipNPMInstall, verbose);
+  installNodeModules(projectPath, skipInstall, packageManager, verbose);
   formatFiles(projectPath, verbose);
 
   // Only make the initial commit once all of the files have been copied and formatted.
@@ -113,15 +115,31 @@ function updateNodeModules(projectPath: string, verbose: boolean) {
 
 function installNodeModules(
   projectPath: string,
-  skipNPMInstall: boolean,
+  skipInstall: boolean,
+  packageManager: PackageManager,
   verbose: boolean,
 ) {
-  if (skipNPMInstall) {
+  if (skipInstall) {
     return;
   }
 
   console.log("Installing node modules... (This can take a long time.)");
-  execShell("npm", ["install"], verbose, false, projectPath);
+
+  switch (packageManager) {
+    case PackageManager.NPM: {
+      execShell("npm", ["install"], verbose, false, projectPath);
+      break;
+    }
+
+    case PackageManager.Yarn: {
+      execShell("yarn", [], verbose, false, projectPath);
+      break;
+    }
+
+    default: {
+      ensureAllCases(packageManager);
+    }
+  }
 }
 
 function formatFiles(projectPath: string, verbose: boolean) {

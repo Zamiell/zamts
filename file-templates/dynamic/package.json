@@ -2,6 +2,7 @@
   "name": "PROJECT_NAME",
   "version": "0.0.0",
   "description": "",
+  "keywords": [],
   "homepage": "https://github.com/AUTHOR_NAME/PROJECT_NAME",
   "bugs": {
     "url": "https://github.com/AUTHOR_NAME/PROJECT_NAME/issues"
@@ -11,6 +12,7 @@
     "url": "git+https://github.com/AUTHOR_NAME/PROJECT_NAME.git"
   },
   "license": "GPL-3.0",
+  "type": "commonjs",
   "author": "AUTHOR_NAME",
   "scripts": {
     "build": "tsc",
