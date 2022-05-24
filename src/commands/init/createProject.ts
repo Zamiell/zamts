@@ -1,6 +1,8 @@
 import chalk from "chalk";
 import path from "path";
 import {
+  CI_YML,
+  CI_YML_TEMPLATE_PATH,
   GITIGNORE,
   GITIGNORE_TEMPLATE_PATH,
   PACKAGE_JSON,
@@ -11,8 +13,13 @@ import {
 } from "../../constants";
 import * as file from "../../file";
 import { initGitRepository } from "../../git";
+import {
+  getPackageManagerInstallCICommand,
+  getPackageManagerInstallCommand,
+  getPackageManagerLockFileName,
+} from "../../packageManager";
 import { PackageManager } from "../../types/PackageManager";
-import { ensureAllCases, execShell } from "../../utils";
+import { execShell } from "../../utils";
 
 export function createProject(
   projectName: string,
@@ -29,7 +36,13 @@ export function createProject(
   }
 
   copyStaticFiles(projectPath, verbose);
-  copyDynamicFiles(projectName, projectPath, authorName, verbose);
+  copyDynamicFiles(
+    projectName,
+    projectPath,
+    authorName,
+    packageManager,
+    verbose,
+  );
   updateNodeModules(projectPath, verbose);
   installNodeModules(projectPath, skipInstall, packageManager, verbose);
   formatFiles(projectPath, verbose);
@@ -52,13 +65,34 @@ function copyStaticFiles(projectPath: string, verbose: boolean) {
   });
 }
 
-// Copy files that need to have text replaced inside of them.
+/** Copy files that need to have text replaced inside of them. */
 function copyDynamicFiles(
   projectName: string,
   projectPath: string,
   authorName: string,
+  packageManager: PackageManager,
   verbose: boolean,
 ) {
+  const workflowsPath = path.join(projectPath, ".github", "workflows");
+  file.makeDir(workflowsPath, verbose);
+
+  // `.github/workflows/ci.yml`
+  {
+    const fileName = CI_YML;
+    const templatePath = CI_YML_TEMPLATE_PATH;
+    const template = file.read(templatePath, verbose);
+
+    const lockFileName = getPackageManagerLockFileName(packageManager);
+    const installCommand = getPackageManagerInstallCICommand(packageManager);
+    const ciYML = template
+      .replace(/PACKAGE-MANAGER-NAME/g, packageManager)
+      .replace(/PACKAGE-MANAGER-LOCK-FILE-NAME/, lockFileName)
+      .replace(/PACKAGE-MANAGER-INSTALL/, installCommand);
+
+    const destinationPath = path.join(workflowsPath, fileName);
+    file.write(destinationPath, ciYML, verbose);
+  }
+
   // `.gitignore`
   {
     const fileName = GITIGNORE;
@@ -103,7 +137,9 @@ function copyDynamicFiles(
 }
 
 function updateNodeModules(projectPath: string, verbose: boolean) {
-  console.log("Finding out the latest versions of the NPM packages...");
+  console.log(
+    'Finding out the latest versions of the NPM packages with "npm-check-updates"...',
+  );
   execShell(
     "npx",
     ["npm-check-updates", "--upgrade", "--packageFile", "package.json"],
@@ -123,23 +159,11 @@ function installNodeModules(
     return;
   }
 
-  console.log("Installing node modules... (This can take a long time.)");
-
-  switch (packageManager) {
-    case PackageManager.NPM: {
-      execShell("npm", ["install"], verbose, false, projectPath);
-      break;
-    }
-
-    case PackageManager.Yarn: {
-      execShell("yarn", [], verbose, false, projectPath);
-      break;
-    }
-
-    default: {
-      ensureAllCases(packageManager);
-    }
-  }
+  const [command, args] = getPackageManagerInstallCommand(packageManager);
+  console.log(
+    `Installing node modules with "${command}"... (This can take a long time.)`,
+  );
+  execShell(command, args, verbose, false, projectPath);
 }
 
 function formatFiles(projectPath: string, verbose: boolean) {
