@@ -63,6 +63,24 @@ function copyStaticFiles(projectPath: string, verbose: boolean) {
       file.copy(templateFilePath, destinationFilePath, verbose);
     }
   });
+
+  // Rename ".eslintrc.js.template" to ".eslintrc.js". (If it is kept as ".eslintrc.js", then local
+  // linting will fail.)
+  const ESLintConfigPath = path.join(projectPath, ".eslintrc.js.template");
+  const correctESLintConfigPath = path.join(projectPath, ".eslintrc.js");
+  file.rename(ESLintConfigPath, correctESLintConfigPath, verbose);
+
+  // Rename "gitattributes" to ".gitattributes". (If it is kept as ".gitattributes", then it won't
+  // be committed to git.)
+  const gitAttributesPath = path.join(projectPath, "gitattributes");
+  const correctGitAttributesPath = path.join(projectPath, ".gitattributes");
+  file.rename(gitAttributesPath, correctGitAttributesPath, verbose);
+
+  // Rename "cspell.json.template" to "cspell.json". (If it is kept as "cspell.json", then local
+  // spell checking will fail.)
+  const cSpellConfigPath = path.join(projectPath, "cspell.json.template");
+  const correctCSpellConfigPath = path.join(projectPath, "cspell.json");
+  file.rename(cSpellConfigPath, correctCSpellConfigPath, verbose);
 }
 
 /** Copy files that need to have text replaced inside of them. */
