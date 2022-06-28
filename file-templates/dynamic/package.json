@@ -19,6 +19,7 @@
     "start": "node dist/main"
   },
   "devDependencies": {
+    "@types/node": "^0.0.1",
     "typescript": "^0.0.1",
     "isaacscript-lint": "^0.0.1",
     "isaacscript-tsconfig": "^0.0.1"
