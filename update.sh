@@ -10,7 +10,10 @@ cd "$DIR"
 
 PACKAGE_JSON="$DIR/package.json"
 OLD_HASH=$(md5sum "$PACKAGE_JSON")
-npx npm-check-updates --upgrade --packageFile "$PACKAGE_JSON" --reject chalk
+# Old versions:
+# - chalk - Stuck until TypeScript supports ESM.
+# - update-notifier - Stuck until TypeScript supports ESM.
+npx npm-check-updates --upgrade --packageFile "$PACKAGE_JSON" --reject chalk,update-notifier
 NEW_HASH=$(md5sum "$PACKAGE_JSON")
 if [[ $OLD_HASH != $NEW_HASH ]]; then
   if test -f "$DIR/yarn.lock"; then

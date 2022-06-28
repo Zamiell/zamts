@@ -1,4 +1,5 @@
 export enum PackageManager {
   NPM = "npm",
-  Yarn = "yarn",
+  YARN = "yarn",
+  PNPM = "pnpm",
 }

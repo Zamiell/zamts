@@ -1,8 +1,8 @@
 import commandExists from "command-exists";
 import path from "path";
 import { promptGitHubRepoOrGitRemoteURL } from "../../git";
+import { getPackageManagerUsedForNewProject } from "../../packageManager";
 import { Args } from "../../parseArgs";
-import { PackageManager } from "../../types/PackageManager";
 import { checkIfProjectPathExists } from "./checkIfProjectPathExists";
 import { createProject } from "./createProject";
 import { getAuthorName } from "./getAuthorName";
@@ -11,11 +11,8 @@ import { installVSCodeExtensions } from "./installVSCodeExtensions";
 import { promptVSCode } from "./promptVSCode";
 
 export async function init(args: Args): Promise<void> {
-  const npm = args.npm === true;
-  let packageManager = npm ? PackageManager.NPM : PackageManager.Yarn;
-  if (packageManager === PackageManager.Yarn && !commandExists.sync("yarn")) {
-    packageManager = PackageManager.NPM;
-  }
+  const packageManager = getPackageManagerUsedForNewProject(args);
+  const noGit = args.noGit === true;
   const skipNPMInstall = args.skipInstall === true;
   const useCurrentDir = args.useCurrentDir === true;
   const verbose = args.verbose === true;
@@ -35,6 +32,7 @@ export async function init(args: Args): Promise<void> {
   const projectName = path.basename(projectPath);
   const gitRemoteURL = await promptGitHubRepoOrGitRemoteURL(
     projectName,
+    noGit,
     yes,
     verbose,
   );
